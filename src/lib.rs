@@ -36,7 +36,7 @@ extern crate serde;
 extern crate serde_json;
 
 use reqwest::header::{
-    ACCEPT, ACCEPT_ENCODING, CONTENT_ENCODING, CONTENT_TYPE, HeaderMap
+    ACCEPT, CONTENT_ENCODING, CONTENT_TYPE, HeaderMap
 };
 use std::str::FromStr;
 
@@ -383,8 +383,9 @@ impl PushNotifier {
     ) -> Result<reqwest::Response, Error> {
         let mut headers = HeaderMap::new();
         headers.insert(ACCEPT, "application/json".parse().unwrap());
-        headers.insert(ACCEPT_ENCODING, "gzip".parse().unwrap());
-        headers.insert(ACCEPT_ENCODING, "deflate".parse().unwrap());
+        // TODO(xanewok): Figure out if this causes deserialization issue
+        // headers.insert(ACCEPT_ENCODING, "gzip".parse().unwrap());
+        // headers.insert(ACCEPT_ENCODING, "deflate".parse().unwrap());
         headers.insert(CONTENT_TYPE, "application/json".parse().unwrap());
 
         if should_compress {
