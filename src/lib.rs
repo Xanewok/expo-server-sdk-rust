@@ -70,6 +70,12 @@ impl Into<String> for PushToken {
     }
 }
 
+impl AsRef<str> for PushToken {
+    fn as_ref(&self) -> &str {
+        &self.0
+    }
+}
+
 #[derive(Debug, Deserialize)]
 struct PushResponse<T>
 where
